@@ -23,11 +23,13 @@ public class ItemPedido {
     @Column(name = "item")
     private Long id;
 
-    @NotEmpty(message = "descrição do item é obrigatória")
+    @NotEmpty(message = "descrição do produto é obrigatória")
     private String descricao;
 
-    private String precoUnitario;
+    @NotEmpty(message = "preço do produto é obrigatória")
+    private Double precoUnitario;
 
+    @NotEmpty(message = "quantidade do produto é obrigatória")
     private Long quantidade;
 
     @ManyToOne(cascade = CascadeType.ALL)
