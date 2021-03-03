@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.casamagalhaes.workshop.desafio.enums.StatusPedido;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +46,7 @@ public class Pedido {
 
     private Double valorTotal;
 
+    @JsonIgnore(value = true)
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
