@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.casamagalhaes.workshop.desafio.enums.StatusPedido;
-import br.com.casamagalhaes.workshop.desafio.model.ItemPedido;
+import br.com.casamagalhaes.workshop.desafio.model.Item;
 import br.com.casamagalhaes.workshop.desafio.model.Pedido;
 import br.com.casamagalhaes.workshop.desafio.repository.PedidoRepository;
 
@@ -38,7 +38,7 @@ public class PedidoService {
         pedido.setStatus(StatusPedido.PENDENTE);
         pedido.setValorTotalProdutos(valorTotalDosProdutos(pedido.getItens()));
         pedido.setValorTotal(pedido.getValorTotalProdutos() + pedido.getTaxa());
-
+        
         return repository.saveAndFlush(pedido);
     }
 
@@ -50,23 +50,47 @@ public class PedidoService {
                 throw new UnsupportedOperationException("STATUS do pedido informado diferente do atual.");
             }
 
-            if (id != pedido.getId()) {
+            if (id != pedido.getPedido()) {
                 throw new UnsupportedOperationException("ID informado diferente do Pedido.");
             }
 
             return repository.saveAndFlush(pedido);
         } else
-            throw new EntityNotFoundException("Pedido id: " + pedido.getId());
+            throw new EntityNotFoundException("Pedido id: " + pedido.getPedido());
 
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
-    private Double valorTotalDosProdutos(List<ItemPedido> itens) {
+    public Pedido saveStatus(Long id, Pedido pedido) {
+        if (repository.existsById(id)) {
+            Pedido pedidoAtual = findById(id);
+
+            if (pedido.getStatus().equals(StatusPedido.CANCELADO) && (!pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA)
+                    || !pedidoAtual.getStatus().equals(StatusPedido.ENTREGUE) || !pedidoAtual.getStatus().equals(StatusPedido.CANCELADO)))
+                throw new UnsupportedOperationException(
+                        "STATUS não pode ser alterado pois seu status atual não coresponde a EM ROTA, ENTREGUE ou CANCELADO.");
+
+            if (pedido.getStatus().equals(StatusPedido.EM_ROTA) && pedidoAtual.getStatus().equals(StatusPedido.PRONTO) )
+                throw new UnsupportedOperationException(
+                        "STATUS não pode ser alterado pois seu status atual coresponde a PRONTO.");
+
+            if (pedido.getStatus().equals(StatusPedido.ENTREGUE) && pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA))
+                throw new UnsupportedOperationException(
+                        "STATUS não pode ser alterado pois seu status atual coresponde a EM ROTA.");
+
+            pedidoAtual.setStatus(pedido.getStatus());
+            return repository.saveAndFlush(pedidoAtual);
+        } else
+            throw new EntityNotFoundException("Pedido não existe.");
+
+    }
+
+    private Double valorTotalDosProdutos(List<Item> itens) {
         Double valor = 0.0;
-        for (ItemPedido itemPedido : itens) {
+        for (Item itemPedido : itens) {
             valor = valor + (itemPedido.getPrecoUnitario() * itemPedido.getQuantidade());
         }
         return valor;

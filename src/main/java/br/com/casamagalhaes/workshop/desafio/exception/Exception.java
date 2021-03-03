@@ -15,14 +15,17 @@ public class Exception {
 
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String notFound(EntityNotFoundException ex) {
-        return ex.getCause().getMessage();
+    public void notFound() {
     }
 
     @ExceptionHandler(UnsupportedOperationException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public String unsupport(UnsupportedOperationException ex) {
-        return ex.getCause().getMessage();
+    public void unsupport() {
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public void nullPointer() {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
