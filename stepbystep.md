@@ -84,13 +84,24 @@ public void deveriaReceberMensagemOK() {
 
 ```json
 {
-   "id": 1,
-   "pedido": "123456",
+    "id": 1,
+    "pedido": "123456",
     "nomeCliente": "JOSE FRANCISCO",
     "endereco": "Rua 6, 500",
     "telefone": "8532795578",
     "valorTotalProdutos": 13.5,
     "taxa": 2.5,
     "valorTotal": 16.0,
+}
+```
+- Para testar o `DELETE` para listar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1`
+  - Onde o 1 representa o Pedido que deseja deletar
+  
+- Para testar o `POST` para alterar o status do Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1/status`
+  - Onde o 1 representa o Pedido que deseja atualizar o status
+  - Adicione o seguinte JSON ao Body ou  Corpo da Requisição
+```json
+{
+  "status": "EM_ROTA"
 }
 ```
