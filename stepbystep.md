@@ -20,7 +20,7 @@
   - No windows e linux `./gradlew bootRun`
 
 ## Etapa 3 - Testando a Aplicação com os Testes Automáticos
-1. Depois de realizado a [Etapa 2](./Etapa 2 - Inicialização)
+1. Depois de realizado a [Etapa 2](./#etapa-2---inicialização)
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o arquivo `PedidoControllerTest.java` e execute a opção de Run, ele irá apresentar uma aba com os resultados de alguns teste realizados pelo desenvolvedor do projeto
 - Exemplo de um teste que lista os dados páginados da página 0 e com quuantidade de arquivos por páginna 5
@@ -39,12 +39,12 @@ public void deveriaReceberMensagemOK() {
 ```
 
 ## Etapa 3 - Vizualizar Documentção da API
-1. Depois de realizado a [Etapa 2](./Etapa 2 - Inicialização)
+1. Depois de realizado a [Etapa 2](./#etapa-2---inicialização)
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o link [Documentação API](http://localhost:8080/swagger-ui/index.html?configUrl=/api-docs/swagger-config) para vizualizar a documentação da  API
 
 ## Etapa 4 - Testando a Aplicação na Mão
-3. Acesse o link [Etapa 2](./Etapa 2 - Inicialização) para vizualizar a documentação da  API
+3. Acesse o link [Etapa 2](./#etapa-2---inicialização) para vizualizar a documentação da  API
 1. Depois de realizado a 
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o Postman
