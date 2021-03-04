@@ -56,9 +56,7 @@ public void deveriaReceberMensagemOK() {
   "nomeCliente":"JOSE FRANCISCO",
   "endereco":"Rua A, 500",
   "telefone":"8532795578",
-  "valorTotalProdutos":13.50,
   "taxa":2.50,
-  "valorTotal":16.00,
   "itens": 
       [{
           "descricao": "Refri",
@@ -90,15 +88,28 @@ public void deveriaReceberMensagemOK() {
 
 ```json
 {
-    "id": 1,
-    "pedido": "123456",
-    "nomeCliente": "JOSE FRANCISCO",
-    "endereco": "Rua 6, 500",
-    "telefone": "8532795578",
-    "valorTotalProdutos": 13.5,
-    "taxa": 2.5,
-    "valorTotal": 16.0,
-}
+  "pedido":"123456",
+  "nomeCliente":"JOSE FRANCISCO",
+  "endereco":"Rua 6, 500",
+  "telefone":"8532795578",
+  "taxa":2.50,
+  "itens": 
+      [{
+          "descricao": "Refrigerante",
+          "precoUnitario": 5.5,
+          "quantidade": 1
+     },
+     {
+          "descricao": "Coxinha",
+          "precoUnitario": 3.00,
+          "quantidade": 1
+     },
+     {
+          "descricao": "Batatinha",
+          "precoUnitario": 5.00,
+          "quantidade": 1
+     }]
+ }
 ```
 - Para testar o `DELETE` para listar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1`
   - Onde o 1 representa o Pedido que deseja deletar
