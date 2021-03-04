@@ -42,8 +42,8 @@ public void deveriaReceberMensagemOK() {
 2. Acesse o arquivo `**PedidoController.java**` e execute a opção de Run
 3. Acesse o Postman
 
-- Para testar o `POST` criei umm requissição para a seguinte rota `localhost:8080/api/v1/pedidos/`
-- Addicione o seguinte JSON ao Body ou  Corpo da Requisição
+- Para testar o `POST` para criar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/`
+- Adicione o seguinte JSON ao Body ou  Corpo da Requisição
 ```json
 {
   "pedido":"123456",
@@ -70,4 +70,27 @@ public void deveriaReceberMensagemOK() {
           "quantidade": 1
      }]
  }
+```
+
+- Para testar o `GET` para listar todos os Pedidos crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/`
+- Adicione os seguintes dados ao `Query Param` **key=pagina value=0** **key=tamanho value=5**
+
+- Para testar o `GET` para listar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1`
+- Onde o 1 representa o Pedido que deseja buscar
+
+- Para testar o `PUT` para atualizar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1`
+- Onde o 1 representa o Pedido que deseja atualizar
+- Adicione o seguinte JSON ao Body ou  Corpo da Requisição
+
+```json
+{
+   "id": 1,
+   "pedido": "123456",
+    "nomeCliente": "JOSE FRANCISCO",
+    "endereco": "Rua 6, 500",
+    "telefone": "8532795578",
+    "valorTotalProdutos": 13.5,
+    "taxa": 2.5,
+    "valorTotal": 16.0,
+}
 ```
