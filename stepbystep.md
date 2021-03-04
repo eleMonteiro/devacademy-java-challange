@@ -19,4 +19,9 @@
 - Abra o terminal do próprio Visual Studio Code e digite
   - No windows e linux ./gradlew bootRun
 
+## Etapa 3 - Testando a Aplicação
+- Depois de realizado a Etapa 2
+- Acesse o arquivo PedidoController.java e execute a opção de Run
+- Em seguida se deseja realizar teste sem necessariamente precisar digitar dados
+- Acesse o arquivo PedidoControllerTest.java e execute a opção de Run
 
