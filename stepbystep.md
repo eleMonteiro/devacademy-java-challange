@@ -24,13 +24,18 @@
 - Acesse o arquivo **PedidoController.java** e execute a opção de Run
 - Em seguida se deseja realizar teste sem necessariamente precisar digitar dados
 - Acesse o arquivo **PedidoControllerTest.java** e execute a opção de Run, ele irá apresentar uma aba com os resultados de alguns teste realizados pelo desenvolvedor do projeto
-EXEMPLO DE UM TESTE
+Exemplo de um teste que lista os dados páginados da página 0 e com quuantidade de arquivos por páginna 5
 ```java
 @Test
-       public void deveriaReceberMensagemOK() {
-                given().spec(requisicao).param("pagina", 0).param("tamanho", 5).expect().statusCode(HttpStatus.SC_OK)
-                                .when().get();
-        }
-
+public void deveriaReceberMensagemOK() {
+  given()
+  .spec(requisicao)
+    .param("pagina", 0)
+    .param("tamanho", 5)
+  .expect()
+    .statusCode(HttpStatus.SC_OK)
+  .when()
+    .get();
+}
 ```
 
