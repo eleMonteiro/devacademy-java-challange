@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.casamagalhaes.workshop.desafio.enums.StatusPedido;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,5 +50,6 @@ public class Pedido {
     private StatusPedido status;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Item> itens;
 }

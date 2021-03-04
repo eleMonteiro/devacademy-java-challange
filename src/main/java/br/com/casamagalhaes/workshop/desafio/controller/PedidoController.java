@@ -64,6 +64,7 @@ public class PedidoController extends Exception {
     }
 
     @PutMapping({ "/{id}" })
+    @ResponseStatus(code = HttpStatus.OK)
     public Pedido update(@PathVariable Long id, @RequestBody Pedido pedido) {
         return service.update(id, pedido);
     }

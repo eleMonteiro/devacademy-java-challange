@@ -10,10 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Min;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +25,9 @@ import lombok.Setter;
 @Table(name = "itens")
 public class Item {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_item")
-    @JsonIgnore
     private Long id;
 
     @NotEmpty(message = "descrição do produto é obrigatória")
@@ -41,7 +41,7 @@ public class Item {
     private Long quantidade;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     private Pedido pedido;
 
 }

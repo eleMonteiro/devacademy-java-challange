@@ -38,7 +38,7 @@ public class PedidoService {
         pedido.setStatus(StatusPedido.PENDENTE);
         pedido.setValorTotalProdutos(valorTotalDosProdutos(pedido.getItens()));
         pedido.setValorTotal(pedido.getValorTotalProdutos() + pedido.getTaxa());
-        
+
         return repository.saveAndFlush(pedido);
     }
 
@@ -61,23 +61,29 @@ public class PedidoService {
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        } else
+            throw new EntityNotFoundException("Pedido id: " + id);
     }
 
     public Pedido saveStatus(Long id, Pedido pedido) {
         if (repository.existsById(id)) {
             Pedido pedidoAtual = findById(id);
 
-            if (pedido.getStatus().equals(StatusPedido.CANCELADO) && (!pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA)
-                    || !pedidoAtual.getStatus().equals(StatusPedido.ENTREGUE) || !pedidoAtual.getStatus().equals(StatusPedido.CANCELADO)))
+            if (pedido.getStatus().equals(StatusPedido.CANCELADO)
+                    && (!pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA)
+                            || !pedidoAtual.getStatus().equals(StatusPedido.ENTREGUE)
+                            || !pedidoAtual.getStatus().equals(StatusPedido.CANCELADO)))
                 throw new UnsupportedOperationException(
                         "STATUS não pode ser alterado pois seu status atual não coresponde a EM ROTA, ENTREGUE ou CANCELADO.");
 
-            if (pedido.getStatus().equals(StatusPedido.EM_ROTA) && pedidoAtual.getStatus().equals(StatusPedido.PRONTO) )
+            if (pedido.getStatus().equals(StatusPedido.EM_ROTA) && pedidoAtual.getStatus().equals(StatusPedido.PRONTO))
                 throw new UnsupportedOperationException(
                         "STATUS não pode ser alterado pois seu status atual coresponde a PRONTO.");
 
-            if (pedido.getStatus().equals(StatusPedido.ENTREGUE) && pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA))
+            if (pedido.getStatus().equals(StatusPedido.ENTREGUE)
+                    && pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA))
                 throw new UnsupportedOperationException(
                         "STATUS não pode ser alterado pois seu status atual coresponde a EM ROTA.");
 
