@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,6 +27,16 @@ public class Exception {
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public void nullPointer() {
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public void numberFormat() {
+    }
+
+    @ExceptionHandler(JdbcSQLIntegrityConstraintViolationException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public void integrityDados() {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

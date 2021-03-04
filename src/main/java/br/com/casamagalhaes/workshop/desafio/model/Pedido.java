@@ -28,7 +28,11 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_pedido")
-    private Long pedido;
+    private Long id;
+
+    @Column(unique = true)
+    @NotEmpty(message = "pedido é obrigatório")
+    private String pedido;
 
     @NotEmpty(message = "nome do cliente é obrigatório")
     private String nomeCliente;

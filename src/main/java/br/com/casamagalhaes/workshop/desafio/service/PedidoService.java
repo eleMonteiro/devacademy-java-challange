@@ -50,13 +50,13 @@ public class PedidoService {
                 throw new UnsupportedOperationException("STATUS do pedido informado diferente do atual.");
             }
 
-            if (id != pedido.getPedido()) {
+            if (id != pedido.getId()) {
                 throw new UnsupportedOperationException("ID informado diferente do Pedido.");
             }
 
             return repository.saveAndFlush(pedido);
         } else
-            throw new EntityNotFoundException("Pedido id: " + pedido.getPedido());
+            throw new EntityNotFoundException("Pedido id: " + pedido.getId());
 
     }
 
@@ -72,9 +72,9 @@ public class PedidoService {
             Pedido pedidoAtual = findById(id);
 
             if (pedido.getStatus().equals(StatusPedido.CANCELADO)
-                    && (!pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA)
-                            || !pedidoAtual.getStatus().equals(StatusPedido.ENTREGUE)
-                            || !pedidoAtual.getStatus().equals(StatusPedido.CANCELADO)))
+                    && !pedidoAtual.getStatus().equals(StatusPedido.EM_ROTA)
+                    && !pedidoAtual.getStatus().equals(StatusPedido.ENTREGUE)
+                    && !pedidoAtual.getStatus().equals(StatusPedido.CANCELADO))
                 throw new UnsupportedOperationException(
                         "STATUS não pode ser alterado pois seu status atual não coresponde a EM ROTA, ENTREGUE ou CANCELADO.");
 
