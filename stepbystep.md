@@ -19,12 +19,11 @@
 - Abra o terminal do próprio Visual Studio Code e digite
   - No windows e linux **./gradlew bootRun**
 
-## Etapa 3 - Testando a Aplicação
-- Depois de realizado a Etapa 2
-- Acesse o arquivo **PedidoController.java** e execute a opção de Run
-- Em seguida se deseja realizar teste sem necessariamente precisar digitar dados
-- Acesse o arquivo **PedidoControllerTest.java** e execute a opção de Run, ele irá apresentar uma aba com os resultados de alguns teste realizados pelo desenvolvedor do projeto
-Exemplo de um teste que lista os dados páginados da página 0 e com quuantidade de arquivos por páginna 5
+## Etapa 3 - Testando a Aplicação com os Testes Automáticos
+1. Depois de realizado a Etapa 2
+2. Acesse o arquivo **PedidoController.java** e execute a opção de Run
+3. Acesse o arquivo **PedidoControllerTest.java** e execute a opção de Run, ele irá apresentar uma aba com os resultados de alguns teste realizados pelo desenvolvedor do projeto
+- Exemplo de um teste que lista os dados páginados da página 0 e com quuantidade de arquivos por páginna 5
 ```java
 @Test
 public void deveriaReceberMensagemOK() {
