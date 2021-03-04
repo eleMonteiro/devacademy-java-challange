@@ -1,4 +1,4 @@
-#Premissas:
+# Premissas:
 - Java 11 deve ser ou estar instalado;
   -  Para  verificar a versão no windows abra o cmd e digite:
     -   java -version;
