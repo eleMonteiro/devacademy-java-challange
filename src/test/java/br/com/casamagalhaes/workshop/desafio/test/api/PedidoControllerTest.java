@@ -32,11 +32,9 @@ public class PedidoControllerTest {
 
         private ObjectMapper objectMapper = new ObjectMapper();
 
-        private static Long numeroPedido = 0L;
 
         @BeforeEach
         private void prepararRequisicao() {
-                numeroPedido++;
                 requisicao = new RequestSpecBuilder().setBasePath("/api/v1/pedidos").setPort(porta)
                                 .setAccept(ContentType.JSON).setContentType(ContentType.JSON).build();
         }
@@ -55,7 +53,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaCriarUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123456");
                 given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when().post().then()
                                 .statusCode(HttpStatus.SC_CREATED);
         }
@@ -63,7 +61,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmBadRequestAoCriarUmPedidoSemItems() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoFaltandoOsItems();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123457");
                 given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when().post().then()
                                 .statusCode(HttpStatus.SC_BAD_REQUEST);
         }
@@ -71,7 +69,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmBadRequestAoCriarUmPedidoComItemsSemQuantidade() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoFaltandoAQuantidadeDosItens();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123458");
                 given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when().post().then()
                                 .statusCode(HttpStatus.SC_BAD_REQUEST);
         }
@@ -79,7 +77,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123459");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -95,7 +93,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoRetornarOPedidoPesquisado() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123460");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -109,7 +107,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmErrorPorReceberUmaStringParaPesquisarPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123461");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -124,7 +122,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123462");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -141,7 +139,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarUmPedidoComStatusDiferenteDoAtual() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123463");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -159,7 +157,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarUmPedidoComIdDiferenteDoIdDoPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123464");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -177,7 +175,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarUmPedidoComIdInexistente() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123465");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -195,7 +193,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmErrorPorReceberUmaStringParaAtualizarUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123466");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -210,7 +208,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRemoverUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123467");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -226,7 +224,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoRemoverUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123468");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -242,7 +240,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaRetornarUmErrorPorReceberUmaStringParaRemoverUmPedido() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123469");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -257,7 +255,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaPreparando() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123470");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -278,7 +276,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaCanceladoQuandoOAtualForEmRota() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123471");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -304,7 +302,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaCanceladoQuandoOAtualForEntregue() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123472");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -329,7 +327,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaCanceladoQuandoOAtualForCancelado() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123473");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -359,7 +357,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarOStatusDoPedidoParaCanceladoQuandoOAtualForPendente() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123474");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -377,7 +375,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarOStatusDoPedidoParaEmRotaQuandoOAtualForPronto() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123475");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -401,7 +399,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaEmRotaQuandoOAtualNaoForPronto() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123476");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -419,7 +417,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaAtualizarOStatusDoPedidoParaEntregueQuandoOAtualNaoForEmRota() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123477");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
@@ -437,7 +435,7 @@ public class PedidoControllerTest {
         @Test
         public void deveriaNaoAtualizarOStatusDoPedidoParaEntregueQuandoOAtualForEmRota() throws JsonProcessingException {
                 Pedido pedido = dadoUmPedidoComTodosOsDados();
-                pedido.setPedido("123456" + numeroPedido);
+                pedido.setPedido("123478");
 
                 Pedido pedidoSalvo = given().spec(requisicao).body(objectMapper.writeValueAsString(pedido)).when()
                                 .post().then().statusCode(HttpStatus.SC_CREATED).extract().as(Pedido.class);
