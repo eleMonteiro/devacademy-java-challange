@@ -53,6 +53,9 @@ public class PedidoService {
             if (id != pedido.getId()) {
                 throw new UnsupportedOperationException("ID informado diferente do Pedido.");
             }
+            
+            pedido.setValorTotalProdutos(valorTotalDosProdutos(pedido.getItens()));
+            pedido.setValorTotal(pedido.getValorTotalProdutos() + pedido.getTaxa());
 
             return repository.saveAndFlush(pedido);
         } else

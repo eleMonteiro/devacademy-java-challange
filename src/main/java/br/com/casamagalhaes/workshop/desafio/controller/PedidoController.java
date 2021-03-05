@@ -66,7 +66,14 @@ public class PedidoController extends Exception {
     @PutMapping({ "/{id}" })
     @ResponseStatus(code = HttpStatus.OK)
     public Pedido update(@PathVariable Long id, @RequestBody Pedido pedido) {
-        return service.update(id, pedido);
+        Pedido pedidoAtualizado = service.update(id, pedido);
+
+        for (Item element : pedidoAtualizado.getItens()) {
+            element.setPedido(pedidoAtualizado);
+            itemService.update(element.getId(), element);
+        }
+        
+        return pedidoAtualizado;
     }
 
     @DeleteMapping("/{id}")
