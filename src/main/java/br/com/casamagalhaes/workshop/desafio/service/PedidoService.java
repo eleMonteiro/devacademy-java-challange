@@ -54,6 +54,10 @@ public class PedidoService {
                 throw new UnsupportedOperationException("ID informado diferente do Pedido.");
             }
             
+            if (pedido.getItens().isEmpty()) {
+                throw new NullPointerException("pedido de venda sem produtos");
+            }
+            
             pedido.setValorTotalProdutos(valorTotalDosProdutos(pedido.getItens()));
             pedido.setValorTotal(pedido.getValorTotalProdutos() + pedido.getTaxa());
 
