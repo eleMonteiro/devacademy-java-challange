@@ -20,7 +20,7 @@
   - No windows e linux `./gradlew bootRun`
 
 ## Etapa 3 - Testando a Aplicação com os Testes Automáticos
-1. Depois de realizado a [Etapa 2](./Etapa 2 - Inicialização)
+1. Depois de realizado a Etapa 2
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o arquivo `PedidoControllerTest.java` e execute a opção de Run, ele irá apresentar uma aba com os resultados de alguns teste realizados pelo desenvolvedor do projeto
 - Exemplo de um teste que lista os dados páginados da página 0 e com quuantidade de arquivos por páginna 5
@@ -39,13 +39,12 @@ public void deveriaReceberMensagemOK() {
 ```
 
 ## Etapa 3 - Vizualizar Documentção da API
-1. Depois de realizado a [Etapa 2](./Etapa 2 - Inicialização)
+1. Depois de realizado a Etapa 2
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o link [Documentação API](http://localhost:8080/swagger-ui/index.html?configUrl=/api-docs/swagger-config) para vizualizar a documentação da  API
 
 ## Etapa 4 - Testando a Aplicação na Mão
-3. Acesse o link [Etapa 2](./Etapa 2 - Inicialização) para vizualizar a documentação da  API
-1. Depois de realizado a 
+1. Depois de realizado a Etapa 2
 2. Acesse o arquivo `PedidoController.java` e execute a opção de Run
 3. Acesse o Postman
 
@@ -57,9 +56,7 @@ public void deveriaReceberMensagemOK() {
   "nomeCliente":"JOSE FRANCISCO",
   "endereco":"Rua A, 500",
   "telefone":"8532795578",
-  "valorTotalProdutos":13.50,
   "taxa":2.50,
-  "valorTotal":16.00,
   "itens": 
       [{
           "descricao": "Refri",
@@ -92,13 +89,32 @@ public void deveriaReceberMensagemOK() {
 ```json
 {
     "id": 1,
-    "pedido": "123456",
+    "pedido": "111111",
     "nomeCliente": "JOSE FRANCISCO",
     "endereco": "Rua 6, 500",
     "telefone": "8532795578",
-    "valorTotalProdutos": 13.5,
     "taxa": 2.5,
-    "valorTotal": 16.0,
+    "status": "PENDENTE",
+    "itens": [
+        {
+            "id": 2,
+            "descricao": "Refrigerante",
+            "precoUnitario": 5.5,
+            "quantidade": 1
+        },
+        {
+            "id": 3
+            "descricao": "Coxinha",
+            "precoUnitario": 3.0,
+            "quantidade": 1
+        },
+        {
+            "id": 4,
+            "descricao": "Batatinha",
+            "precoUnitario": 5.0,
+            "quantidade": 1
+        }
+    ]
 }
 ```
 - Para testar o `DELETE` para listar um Pedido crie um requisição para a seguinte rota `localhost:8080/api/v1/pedidos/1`
